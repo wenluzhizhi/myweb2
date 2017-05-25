@@ -2,7 +2,7 @@
 	Properties{
 
          _Speed("Speed",Range(0,100))=2
-          _SpeedV("Speed",Range(0,100))=2
+          _SpeedV("Speed",Range(0,1))=1
 	     _MainTex("MainTex",2D)="white"{}
 	}
 
@@ -35,24 +35,22 @@
 
 	       };
 
-	       v2f vert(a2v v)
-	       {
+	        v2f vert(a2v v)
+	        {
+	            v2f o;
+	            v.vertex.y+=sin(_Time.y+(v.vertex.x+v.vertex.z))*_Speed;
+	            o.pos=mul(UNITY_MATRIX_MVP,v.vertex);
+	            o.texcoord.xy=_MainTex_ST.xy*v.texcoord.xy+_MainTex_ST;
+	          return o;
+	        }
 
-              v2f o;
-              float waveValueA = sin(_Time.y + v.vertex.z )* _SpeedV;
-              v.vertex.xyz = float3(v.vertex.x, v.vertex.y + waveValueA, v.vertex.z);  
-              o.pos=mul(UNITY_MATRIX_MVP,v.vertex);
-              o.texcoord=v.texcoord.xy*_MainTex_ST.xy+_MainTex_ST.zw;
-              return o;
-	       }
+	        fixed4 frag(v2f i):SV_Target{
 
+	             i.texcoord.y+=sin(_Time.y*_SpeedV);
+                 fixed4 col=tex2D(_MainTex,i.texcoord.xy);
+                 return col;
+	        }
 
-	       fixed4 frag(v2f i):SV_Target{
-
-	           i.texcoord.y+=sin(_Time.x*_Speed);
-               float4 color=tex2D(_MainTex,i.texcoord);
-               return color;
-	       }
 
 	    ENDCG
 
