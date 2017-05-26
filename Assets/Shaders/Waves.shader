@@ -4,6 +4,7 @@
          _Speed("Speed",Range(0,100))=2
           _SpeedV("Speed",Range(0,1))=1
 	     _MainTex("MainTex",2D)="white"{}
+	     _merage("merage",Range(0,1))=0.5
 	}
 
 	Subshader{
@@ -20,6 +21,7 @@
 	       sampler2D  _MainTex;
 	       float _Speed;
 	       float _SpeedV;
+		   float _merage;
 	       
 	       struct a2v{
 
@@ -45,10 +47,12 @@
 	        }
 
 	        fixed4 frag(v2f i):SV_Target{
+	             i.texcoord.y+=sin(_Time.y*_SpeedV*2);
+			     fixed4 col = tex2D(_MainTex, i.texcoord.xy);
+				 i.texcoord.y += sin(_Time.y*_SpeedV);
+				 fixed4 col2 = tex2D(_MainTex, i.texcoord.xy);
 
-	             i.texcoord.y+=sin(_Time.y*_SpeedV);
-                 fixed4 col=tex2D(_MainTex,i.texcoord.xy);
-                 return col;
+				 return col*_merage+col2*(1-_merage);
 	        }
 
 

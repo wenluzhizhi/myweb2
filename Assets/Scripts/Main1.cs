@@ -11,9 +11,10 @@ public class Main1 : MonoBehaviour
 		load1 ();
 	}
 	
+    
 	private void load1(){
 
-		Texture [] sps = Resources.LoadAll<Texture> ("pic");
+	   Texture [] sps = Resources.LoadAll<Texture> ("pic");
 
 		for (int i = 0; i < sps.Length; i++) {
 			
