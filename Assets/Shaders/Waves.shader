@@ -2,7 +2,7 @@
 	Properties{
 
          _Speed("Speed",Range(0,100))=2
-          _SpeedV("Speed",Range(0,1))=1
+          _SpeedV("SpeedV",Range(0,1))=1
 	     _MainTex("MainTex",2D)="white"{}
 	     _merage("merage",Range(0,1))=0.5
 	}
