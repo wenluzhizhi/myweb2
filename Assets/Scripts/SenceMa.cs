@@ -16,7 +16,8 @@ public class SenceMa : MonoBehaviour
 	
 	}
 
-	public void OnClickLoad(){
+	public void OnClickLoad()
+	{
 
 		Application.LoadLevel ("myWeb");
 	}
