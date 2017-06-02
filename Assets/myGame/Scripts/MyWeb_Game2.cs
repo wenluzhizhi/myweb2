@@ -6,14 +6,15 @@ public class MyWeb_Game2 : MonoBehaviour
 {
 
 
-    public static void MyLog(string str) {
+    public static void MyLog(string str)
+    {
         if (Application.platform==RuntimePlatform.WindowsEditor) {
             Debug.Log(str);
         }
     }
 
 
-    public string bundlePath = "http://47.93.232.239/AssetBundles/test/Bundle/";
+    private string bundlePath = "http://47.93.232.239/AssetBundles/Bundle/";
     void Start()
     {
         StartCoroutine(LoadManifest());
@@ -24,7 +25,7 @@ public class MyWeb_Game2 : MonoBehaviour
     private IEnumerator LoadManifest()
     {
         listAssets.Clear();
-        string strManifestFileName = bundlePath + "Bundle.unity3d";
+        string strManifestFileName = bundlePath + "Bundles.unity3d";
         MyLog(strManifestFileName);
         WWW wloadManifest = new WWW(strManifestFileName);
         yield return wloadManifest;
@@ -45,7 +46,7 @@ public class MyWeb_Game2 : MonoBehaviour
         }
         else
         {
-            MyLog("Manifest get failed:"+Time.time+strManifestFileName);
+            MyLog("Manifest get failed:"+Time.time+strManifestFileName+"  "+wloadManifest.error);
         }
         if (listAssets.Count > 0) {
             loadData();
