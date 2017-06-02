@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LoadAssetBundle : MonoBehaviour {
+public class LoadAssetBundle : MonoBehaviour
+{
+    #region 
+    #endregion
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
