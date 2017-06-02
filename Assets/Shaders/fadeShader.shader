@@ -1,4 +1,6 @@
-﻿Shader "Custom/fadeShader" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/fadeShader" {
     Properties {
         _MainTex ("Texture", 2D) = "white" { }
         _FadeDistanceNear ("Near fadeout dist (View Space)", float) = 35    
@@ -27,7 +29,7 @@
             v2f vert (appdata_base v)
             {
                 v2f o;
-                o.pos = mul(UNITY_MATRIX_MVP,v.vertex);
+                o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.texcoord,_MainTex);
                 //相机坐标系的物体坐标
                 float3 posView = mul(UNITY_MATRIX_MV,v.vertex).xyz;

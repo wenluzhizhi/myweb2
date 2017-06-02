@@ -1,4 +1,6 @@
-﻿Shader "Custom/Waves" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/Waves" {
 	Properties{
 
          _Speed("Speed",Range(0,100))=2
@@ -41,7 +43,7 @@
 	        {
 	            v2f o;
 	            v.vertex.y+=sin(_Time.y+(v.vertex.x+v.vertex.z))*_Speed;
-	            o.pos=mul(UNITY_MATRIX_MVP,v.vertex);
+	            o.pos=UnityObjectToClipPos(v.vertex);
 	            o.texcoord.xy=_MainTex_ST.xy*v.texcoord.xy+_MainTex_ST;
 	          return o;
 	        }
