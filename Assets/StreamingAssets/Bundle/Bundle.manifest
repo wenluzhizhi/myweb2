@@ -1,0 +1,12 @@
+ManifestFileVersion: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: assets/prefabs/initialsence/castle.prefab.unity3d
+      Dependencies: {}
+    Info_1:
+      Name: assets/prefabs/initialsence/waterplane.prefab.unity3d
+      Dependencies: {}
+    Info_2:
+      Name: assets/prefabs/initialsence/cowboy.prefab.unity3d
+      Dependencies: {}

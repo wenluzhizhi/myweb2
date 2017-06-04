@@ -22,7 +22,7 @@ public class CreateAssetBundle
     [MenuItem("AssetBundle/CreateBundle")]
     static void CreateBundle() {
         Debug.Log("Create Bundles");
-		BuildPipeline.BuildAssetBundles("Assets/StreamingAssets/Bundles/",BuildAssetBundleOptions.CompleteAssets,BuildTarget.WebGL);
+		BuildPipeline.BuildAssetBundles("Assets/StreamingAssets/Bundle/");
     }
 
 }

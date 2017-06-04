@@ -43,7 +43,7 @@ Shader "Custom/Waves" {
 	        {
 	            v2f o;
 	            v.vertex.y+=sin(_Time.y+(v.vertex.x+v.vertex.z))*_Speed;
-	            o.pos=UnityObjectToClipPos(v.vertex);
+	            o.pos=mul(UNITY_MATRIX_MVP,v.vertex);
 	            o.texcoord.xy=_MainTex_ST.xy*v.texcoord.xy+_MainTex_ST;
 	          return o;
 	        }

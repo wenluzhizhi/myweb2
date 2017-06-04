@@ -133,6 +133,10 @@ public class UIBehaviourController : MonoBehaviour
 				} else if (currentNum == 1) {
 					Application.LoadLevel ("main");
 				}
+
+				else if (currentNum == 2) {
+					Application.LoadLevel ("game_main");
+				}
 			}
 
 		}

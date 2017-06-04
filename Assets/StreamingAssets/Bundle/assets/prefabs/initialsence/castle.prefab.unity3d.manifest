@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 556154192
+CRC: 366579904
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: da92d6b2982c7164119d898f90d771dd
+    Hash: 8bc6032d68c274cb23572e0ac8d7310f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 21570c0632ea56fe868a7ed8a9f6981c
+    Hash: e6d74f2d6b370c4d26f3cae461538e43
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -26,5 +26,5 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 Assets:
-- Assets/Prefabs/Castle.prefab
+- Assets/Prefabs/InitialSence/Castle.prefab
 Dependencies: []

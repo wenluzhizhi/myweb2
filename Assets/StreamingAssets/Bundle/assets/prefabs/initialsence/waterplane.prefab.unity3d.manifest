@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 284079428
+CRC: 978485098
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ea2904ba9ceca2946da07d96c3ad63b8
+    Hash: be21a8fa5c77c8b862b1b25ee470e27f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1c518e1e69fcc7057a45b667cd575bd6
+    Hash: 540d70e77afe6fd8bf6ece50cde760bc
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,5 +28,5 @@ ClassTypes:
 - Class: 64
   Script: {instanceID: 0}
 Assets:
-- Assets/Prefabs/WaterPlane.prefab
+- Assets/Prefabs/InitialSence/WaterPlane.prefab
 Dependencies: []
