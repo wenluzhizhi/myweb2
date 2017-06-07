@@ -9,4 +9,5 @@ public class WebConfig : MonoBehaviour
 	public static string animator_state_walk ="walk";
 	public static string animator_state_idle ="idle";
 	public static string animator_state_attack ="attack";
+    public static string animator_state_jump = "jump";
 }
