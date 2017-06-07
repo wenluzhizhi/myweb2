@@ -11,9 +11,7 @@ public class CowBoyPlayer : MonoBehaviour
 	public int rotateSpeed=20;
 	public int thrustSpeed=20;
 
-	private string animator_state_walk ="walk";
-	private string animator_state_idle ="idle";
-	private string animator_state_attack ="attack";
+
 
 	private AnimatorStateInfo animatorState = new AnimatorStateInfo();
 	void Start () {
@@ -45,14 +43,14 @@ public class CowBoyPlayer : MonoBehaviour
 		else 
 		{
 			if (!animatorState.IsName ("DualIdle")&&!animatorState.IsName ("2HAttack")) {
-				animator.SetTrigger (animator_state_idle);
+				animator.SetTrigger (WebConfig.animator_state_idle);
 			}
 			  
 		}
 
 		if (Input.GetKey (KeyCode.J)) {
 			if(!animatorState.IsName("2HAttack"))
-				animator.SetTrigger (animator_state_attack);
+				animator.SetTrigger (WebConfig.animator_state_attack);
 		}
 
 		if (Input.GetKey (KeyCode.LeftArrow)) {
@@ -73,7 +71,7 @@ public class CowBoyPlayer : MonoBehaviour
 	private void playerforward(int ratio){
 		Player.Translate (Vector3.forward * Time.deltaTime*ratio);
 		if(!animatorState.IsName("1HWalkF"))
-		   animator.SetTrigger (animator_state_walk);
+			animator.SetTrigger (WebConfig.animator_state_walk);
 	}
 	private void playerRotateRight(int ratio){
 		Player.Rotate (new Vector3(0,Time.deltaTime*rotateSpeed*ratio,0));
