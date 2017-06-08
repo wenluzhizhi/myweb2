@@ -78,7 +78,6 @@ public class PlayerController:NetworkBehaviour{
         if (Input.GetKeyDown(KeyCode.J))
         {
             PlayAttack();
-            shootBullet();
             CmdshootBullet();
         }
         else
@@ -90,17 +89,10 @@ public class PlayerController:NetworkBehaviour{
     [Command]
     public void CmdshootBullet()
     {
-        shootBullet();
-    }
-
-
-    public void shootBullet()
-    {
         GameObject _bullet = GameObject.Instantiate(bulletPrefab, player.transform.position + player.forward * 0.1f + player.up * 1.5f, Quaternion.identity) as GameObject;
         _bullet.gameObject.GetComponent<Rigidbody>().velocity = player.forward * 30;
         Destroy(_bullet, 2);
-
-        
+        NetworkServer.Spawn(_bullet);
     }
 
 
