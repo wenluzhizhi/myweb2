@@ -3,5 +3,5 @@ using System.Collections;
 
 public abstract class AbstractAIFactory
 {
-	public abstract AIEnemy getAIEnemy(string name);
+	public abstract GameObject getAIEnemy(string name);
 }

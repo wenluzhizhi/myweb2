@@ -10,4 +10,12 @@ public class WebConfig : MonoBehaviour
 	public static string animator_state_idle ="idle";
 	public static string animator_state_attack ="attack";
     public static string animator_state_jump = "jump";
+
+
+
+	public static string tagName_player = "player";
+	public static string tagName_player_bullet="playerBullet";
+	public static string tagName_tag_bullet="tankBullet";
+
+	public static string tagName_tag_tank="tank";
 }

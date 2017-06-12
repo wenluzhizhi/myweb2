@@ -9,16 +9,31 @@ public class PlayerController:NetworkBehaviour{
 	private Animator animator;
 	private BoxCollider boxcollider;
 	private Rigidbody rigidbody;
+
 	private AnimatorStateInfo animatorState = new AnimatorStateInfo ();
 	public int rotateSpeed=20;
 	public int thrustSpeed=20;
 
     [SerializeField]
     private GameObject bulletPrefab;
+	[SerializeField]
+	private Transform shootBulletPos;
+
+
+
+
+	[SyncVar(hook="OnScoreChange")]
+	public int PlayerScore;
+
+
+
 	void Start(){
 		player = this.gameObject.GetComponent<Transform> ();
 		animator = this.gameObject.GetComponent<Animator> ();
 		rigidbody = this.gameObject.GetComponent<Rigidbody> ();
+
+
+
         if (isLocalPlayer)
         {
             this.gameObject.GetComponent<CameraFollow>().enabled = true;
@@ -31,6 +46,8 @@ public class PlayerController:NetworkBehaviour{
 
 
 	void Update(){
+
+
 
 		if(!isLocalPlayer) return;
 		animatorState = animator.GetCurrentAnimatorStateInfo (0);
@@ -71,14 +88,13 @@ public class PlayerController:NetworkBehaviour{
         {
             StopJump();
         }
-
-
-
-
         if (Input.GetKeyDown(KeyCode.J))
         {
             PlayAttack();
-            CmdshootBullet();
+			if (this.netId != null) {
+				CmdshootBullet ();
+			}
+
         }
         else
         {
@@ -86,14 +102,21 @@ public class PlayerController:NetworkBehaviour{
         }
 	}
 
-    [Command]
-    public void CmdshootBullet()
+
+
+
+	[Command]
+	public void  CmdshootBullet()
     {
-        GameObject _bullet = GameObject.Instantiate(bulletPrefab, player.transform.position + player.forward * 0.1f + player.up * 1.5f, Quaternion.identity) as GameObject;
+		 GameObject _bullet = GameObject.Instantiate(bulletPrefab,shootBulletPos.position, Quaternion.identity) as GameObject;
+		_bullet.gameObject.SetActive (true);
+		_bullet.gameObject.GetComponent<PlayerBulletController> ().owner = this;
         _bullet.gameObject.GetComponent<Rigidbody>().velocity = player.forward * 30;
         Destroy(_bullet, 2);
-        NetworkServer.Spawn(_bullet);
+		NetworkServer.Spawn (_bullet);
     }
+
+
 
 
     public void PlayJump()
@@ -132,7 +155,7 @@ public class PlayerController:NetworkBehaviour{
 
 
     private void playerForward(int ratio){
-		player.Translate (Vector3.forward*Time.deltaTime*ratio);
+		player.Translate (Vector3.forward*Time.deltaTime*ratio*thrustSpeed);
         wald();
         
 
@@ -148,6 +171,15 @@ public class PlayerController:NetworkBehaviour{
     }
 	private void playerRotateRight(int ratio){
 		player.Rotate (new Vector3(0,Time.deltaTime*rotateSpeed*ratio,0));
+	}
+
+
+
+
+	public void OnScoreChange(int k){
+		if (isLocalPlayer) {
+			SoftSetUp.Instance.CurrentPlayerScore (k);
+		}
 	}
 
 

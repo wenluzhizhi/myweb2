@@ -14,11 +14,35 @@ public class SoftSetUp :NetworkBehaviour
     private NetworkManager networkManager;
     [SerializeField]
     private Image startBtn;
+
+	[SerializeField] private Text ScoreLabel;
+	[SerializeField] private Slider sliderScore;
+
+
+	public int currenScore=50;
+
+	public PlayerController currentPlayer;
+	#region  sigletong
+
+	private static SoftSetUp _instance;
+	public  static SoftSetUp Instance
+	{
+		get{
+			if (_instance == null)
+				_instance = GameObject.FindObjectOfType (typeof(SoftSetUp)) as SoftSetUp;
+			return _instance;
+		}
+
+	}
+
+	#endregion
+
+	public string playerNetid="";
     void Start()
     {
         networkManager = this.gameObject.GetComponent<NetworkManager>();
         
-       
+	
     }
 
 
@@ -57,4 +81,14 @@ public class SoftSetUp :NetworkBehaviour
     {
         base.OnStartServer();
     }
+
+
+
+
+	public void CurrentPlayerScore(int k)
+	{
+		currenScore = k;
+		sliderScore.value = (float)k / 100.0f;
+		ScoreLabel.text = currenScore+"";
+	}
 }

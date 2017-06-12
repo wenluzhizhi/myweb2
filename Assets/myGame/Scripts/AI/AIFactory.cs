@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class AIFactory:AbstractAIFactory
 {
-	public override  AIEnemy getAIEnemy (string name)
+	public override  GameObject getAIEnemy (string name)
 	{
 		if (name == "tank")
 		{
@@ -14,7 +14,7 @@ public class AIFactory:AbstractAIFactory
 				if (_tank!= null)
 				{				 
 					GameObject go=GameObject.Instantiate (_tank) as GameObject;
-					return go.GetComponent<AITank> ();
+					return go;
 				}
 			}	
 			return null;

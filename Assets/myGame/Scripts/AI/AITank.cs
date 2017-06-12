@@ -24,6 +24,13 @@ public class AITank : NetworkBehaviour,AIEnemy
 	public int random0_100 = 0;
 	public Transform bulletGeneratePos;
 	public GameObject Bullet;
+
+
+	void Start()
+	{
+		
+	}
+
 	void  Update()
 	{
 		random0_100 = Mathf.Abs(Utils.getRandom1() % 100);
@@ -41,10 +48,18 @@ public class AITank : NetworkBehaviour,AIEnemy
 		}
 
 		if (random0_100 > 95) {
-			//Attack ();
-			if(NetworkManager.singleton.isNetworkActive){
-				CmdAttack1();
+			if(NetworkManager.singleton.isNetworkActive)
+			{  
+				if (isServer)
+				{
+					//RpcAttack ();
+				}
 			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.A)) {
+
+			Debug.Log ("------------"+Time.time);
 
 		}
 
@@ -55,13 +70,15 @@ public class AITank : NetworkBehaviour,AIEnemy
 	}
 
 
-   [Command]
-	public void CmdAttack1()
+
+
+
+	[ClientRpc]
+	public void RpcAttack()
 	{
 		GameObject _bullet = GameObject.Instantiate (Bullet,bulletGeneratePos.position,Quaternion.identity) as GameObject;
 		_bullet.gameObject.GetComponent<Rigidbody> ().velocity = transform.forward * 60;
 		Destroy (_bullet,2);
-		//NetworkServer.Spawn (_bullet);
 	}
 
 
