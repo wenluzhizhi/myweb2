@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
 public class WebConfig : MonoBehaviour 
 {
 
@@ -15,7 +17,11 @@ public class WebConfig : MonoBehaviour
 
 	public static string tagName_player = "player";
 	public static string tagName_player_bullet="playerBullet";
-	public static string tagName_tag_bullet="tankBullet";
+	public static string tagName_tank_bullet="tankBullet";
 
 	public static string tagName_tag_tank="tank";
 }
+
+
+
+

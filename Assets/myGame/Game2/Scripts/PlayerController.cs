@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.Networking;
 
+
+namespace MyGame.Two{
+
+
 public class PlayerController:NetworkBehaviour{
 
 
@@ -20,29 +24,50 @@ public class PlayerController:NetworkBehaviour{
 	private Transform shootBulletPos;
 
 
-
+		private BoxCollider playerBoxcollider;
 
 	[SyncVar(hook="OnScoreChange")]
 	public int PlayerScore;
 
-
-
-	void Start(){
+	public override void OnStartLocalPlayer ()
+	{
 		player = this.gameObject.GetComponent<Transform> ();
 		animator = this.gameObject.GetComponent<Animator> ();
 		rigidbody = this.gameObject.GetComponent<Rigidbody> ();
+			playerBoxcollider = this.gameObject.GetComponent<BoxCollider> ();
+			playerBoxcollider.center = new Vector3 (0,0.7f,0);
+		if (isLocalPlayer)
+		{
+			this.gameObject.GetComponent<CameraFollow>().enabled = true;
 
+		}
+		else 
+		{
+			this.gameObject.GetComponent<CameraFollow>().enabled = false;
 
-
-        if (isLocalPlayer)
-        {
-            this.gameObject.GetComponent<CameraFollow>().enabled = true;
-        }
-        else {
-            this.gameObject.GetComponent<CameraFollow>().enabled = false;
-        }
-
+		}
+		CmdAddPlayerToServer ();
 	}
+
+
+
+	[Command]
+	public void CmdAddPlayerToServer()
+	{
+		if (SoftSetUp.Instance != null)
+		{
+			
+			SoftSetUp.Instance.AddPlayer (this);
+		} 
+		else 
+		{
+			Debug.Log ("---softSetup...Null"+Time.time);
+
+		}
+		   
+	}
+
+
 
 
 	void Update(){
@@ -102,6 +127,7 @@ public class PlayerController:NetworkBehaviour{
         }
 	}
 
+	
 
 
 
@@ -154,6 +180,8 @@ public class PlayerController:NetworkBehaviour{
 
 
 
+
+
     private void playerForward(int ratio){
 		player.Translate (Vector3.forward*Time.deltaTime*ratio*thrustSpeed);
         wald();
@@ -170,7 +198,7 @@ public class PlayerController:NetworkBehaviour{
 
     }
 	private void playerRotateRight(int ratio){
-		player.Rotate (new Vector3(0,Time.deltaTime*rotateSpeed*ratio,0));
+		player.Rotate (new Vector3(0,Time.deltaTime*rotateSpeed*ratio*rotateSpeed,0));
 	}
 
 
@@ -181,6 +209,20 @@ public class PlayerController:NetworkBehaviour{
 			SoftSetUp.Instance.CurrentPlayerScore (k);
 		}
 	}
+
+
+	void OnCollisionEnter(Collision c){
+		if (c.gameObject.tag==WebConfig.tagName_tank_bullet)
+		{
+			if (isLocalPlayer) {
+				PlayerScore -= 1;	
+			}
+			Destroy (c.gameObject);
+		}
+	}
+
+
+}
 
 
 }
