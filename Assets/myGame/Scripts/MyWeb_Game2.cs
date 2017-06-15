@@ -22,7 +22,7 @@ public class MyWeb_Game2 : MonoBehaviour
 {
     void Start()
     {
-		//InitializationSence();
+	   InitializationSence();
     }
 
 	public List<AssetBundleItem> bundleInfoList=new List<AssetBundleItem>();

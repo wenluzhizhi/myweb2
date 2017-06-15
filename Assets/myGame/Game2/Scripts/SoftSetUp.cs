@@ -4,141 +4,128 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-namespace MyGame.Two{
-
-
-public enum SystemType {
-    Host,Server,Client,
-}
-public class SoftSetUp :NetworkBehaviour
+namespace MyGame.Two
 {
 
-    public SystemType systemType = SystemType.Host;
-    [SerializeField]
-    private NetworkManager networkManager;
-    [SerializeField]
-    private Image startBtn;
-	[SerializeField] private Text ScoreLabel;
-	[SerializeField] private Slider sliderScore;
-	[SerializeField] private Text enemyCountLabel;
 
-
-	public int currenScore=0;
-	public PlayerController currentPlayer;
-	#region  sigletong
-
-	private static SoftSetUp _instance;
-	public  static SoftSetUp Instance
+	public enum SystemType
 	{
-		get{
-			if (_instance == null)
-				_instance = GameObject.FindObjectOfType (typeof(SoftSetUp)) as SoftSetUp;
-			return _instance;
-		}
-
+		Host,
+        Server,
+        Client,
 	}
 
-	#endregion
-
-	public string playerNetid="";
-
-
-
-
-	public List<PlayerController> listPlayers = new List<PlayerController> ();
-		public GenerateAI generateAI;
-	
-	[SyncVar]
-	private int currentSenceEnemyCount=0;
-	public int CurrentSenceEnemyCount
+	public class SoftSetUp :NetworkBehaviour
 	{
-		get{return currentSenceEnemyCount; }
-		set
-		{ 
-			currentSenceEnemyCount = value;
-			if (currentSenceEnemyCount <= 0) {
-				Debug.Log ("enemy kill to zero.....");
-			}
-			enemyCountLabel.text = "Enemy: " + currentSenceEnemyCount;
-				if (generateAI != null&&currentSenceEnemyCount<=3) {
-					generateAI.generateAI (10);
+
+
+   
+		[SerializeField]
+		private Image startBtn;
+		[SerializeField] private Text ScoreLabel;
+		[SerializeField] private Slider sliderScore;
+		[SerializeField] private Text enemyCountLabel;
+
+
+		public int currenScore = 0;
+		public PlayerController currentPlayer;
+
+		#region  sigletong
+
+		private static SoftSetUp _instance;
+
+		public  static SoftSetUp Instance {
+			get {
+				if (_instance == null) {
+					_instance = GameObject.FindObjectOfType (typeof(SoftSetUp)) as SoftSetUp;
 				}
+				if (_instance == null) {
+					Debug.Log ("cannot get SoftSeteUp instance---" + Time.time);
+				}
+
+				return _instance;
+			}
+
 		}
-	}
-    void Start()
-    {
-        networkManager = this.gameObject.GetComponent<NetworkManager>();
-        
+
+		#endregion
+
+
+		public List<PlayerController> listPlayers = new List<PlayerController> ();
+		public GenerateAI generateAI;
+		[SyncVar(hook="OnChangeEnemyCount")]
+		public int currentSenceEnemyCount;
+
+		[SyncVar(hook="OnChagePlayerCount")]
+		public int CurrentGamePlayerCounts;
+
 	
-    }
 
-
-    public void OnClickStartGame()
-    {
-        if (networkManager.isNetworkActive)
-        {
-            Debug.Log("游戏正在运行...");
-            return;
-        }
-        if (systemType == SystemType.Server)
-        {
-            networkManager.StartServer();
-        }
-        else if (systemType == SystemType.Client)
-        {
-            networkManager.StartClient();
-        }
-        else if (systemType == SystemType.Host)
-        {
-            networkManager.StartHost();
-        }
-        startBtn.gameObject.SetActive(false);
-
-    }
-
-
-
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-    }
-
-
-    public override void OnStartServer()
-    {
-        base.OnStartServer();
+		#region  hook Event
 	
-    }
-
-	public override void OnStartLocalPlayer ()
-	{
-		base.OnStartLocalPlayer ();
-
-	}
-	public void CurrentPlayerScore(int k)
-	{
-		currenScore = k;
-		sliderScore.value = (float)k / 100.0f;
-		ScoreLabel.text = "Score: "+currenScore+"";
-	}
-
-
-
-	public void AddPlayer(PlayerController p)
-	{
-		if (listPlayers.Contains (p))
-			return;
-		listPlayers.Add (p);
-
-		
-	}
-
-	public void RemovePlayer(PlayerController p){
-		if (listPlayers.Contains (p)) {
-			listPlayers.Remove (p);
+		public void OnChangeEnemyCount(int count)
+		{
+			MainUIController.Instance.SetCurrentSenceEnemyCount (count);
 		}
+
+		public void OnChagePlayerCount(int count){
+			MainUIController.Instance.SetCurrentOnlinePlayerCount (count);
+		}
+		#endregion
+
+		public void geneTankAI(){
+			if (currentSenceEnemyCount <= 3)
+			{
+				generateAI.SpawnTankAI (10);
+			}
+		}
+
+
+
+
+		#region  Players Manager
+
+		private void removeInvalidPlayer(){
+			foreach (PlayerController p in listPlayers) {
+				if (p == null) {
+					listPlayers.Remove (p);
+				}
+			}
+		}
+		public void AddPlayer (PlayerController p)
+		{
+			removeInvalidPlayer ();
+			if (listPlayers.Contains (p))
+				return;
+			listPlayers.Add (p);
+			CurrentGamePlayerCounts=listPlayers.Count;
+		}
+
+		public void RemovePlayer (PlayerController p)
+		{
+			removeInvalidPlayer ();
+			if (listPlayers.Contains (p))
+			{
+				listPlayers.Remove (p);
+			}
+			CurrentGamePlayerCounts=listPlayers.Count;
+		}
+
+
+
+		public Transform GetFollowPlayer(){
+			removeInvalidPlayer ();
+			if (listPlayers.Count == 0)
+				return null;
+			int _childCount = listPlayers.Count;
+			int _random = Utils.getRandom1 ()%_childCount;
+			if (_random < _childCount) {
+				return listPlayers[_random].gameObject.transform;
+			}
+			return null;
+		}
+		#endregion 
 	}
-}
 
 
 

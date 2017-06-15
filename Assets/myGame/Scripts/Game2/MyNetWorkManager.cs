@@ -5,40 +5,19 @@ using UnityEngine.Networking;
 
 
 
-namespace MyGame.Two{
-
-namespace MyGame_sence
+namespace MyGame.Two
 {
-
-	public class MyNetWorkManager:NetworkManager
-    {
-		//public string serverIP="localhost";
-		//public int portIP = 7777;
+   public class MyNetWorkManager:NetworkManager
+		{
+			//public string serverIP="localhost";
+			//public int portIP = 7777;
 		
 
-			void Start(){
-				this.gameObject.transform.SetSiblingIndex (1);
-			}
+			public GameObject softUp;
 
-		public override void OnClientDisconnect (NetworkConnection conn)
-		{
-
-			base.OnClientDisconnect (conn);
-			Debug.Log ("OnClientDisconnect---"+Time.time);
-		}
-
-
-		public override void OnClientConnect (NetworkConnection conn)
-		{
-			base.OnClientConnect (conn);
-			Debug.Log ("OnClientConnect---"+Time.time);
-
-		}
-
-
-		public override void OnStopClient ()
-		{
-			base.OnStopClient ();
+			public override void OnStopClient ()
+			{
+				base.OnStopClient ();
 				/*
 				if (ClientScene.localPlayers.Count > 0) 
 				{
@@ -46,51 +25,33 @@ namespace MyGame_sence
 				}
 			Debug.Log ("OnStopClient ---"+Time.time);
 			*/
-		}
-
-
-		public override void OnClientError (NetworkConnection conn, int errorCode)
-		{
-			base.OnClientError (conn,errorCode);
-			Debug.Log ("OnClientError---"+Time.time);
-
-		}
-
-
-		public override void OnServerDisconnect (NetworkConnection conn)
-		{
-			base.OnServerDisconnect (conn);
-			Debug.Log ("OnServerDisconnect---"+Time.time+"+-"+conn.hostId);
-		}
-		public override void OnServerConnect (NetworkConnection conn)
-		{
-			base.OnServerConnect (conn);
-			Debug.Log ("OnServerConnect---"+Time.time+"+-"+conn.hostId);
-
-
-			List< UnityEngine.Networking.PlayerController> list1 = conn.playerControllers;
-			if (list1 == null || list1.Count == 0)
-				Debug.Log ("lianjiezo----------null--");
-			for (int i = 0; i < list1.Count; i++)
-			{
-				Debug.Log (list1[i].gameObject.name);
 			}
-		}
 
 
-		void Update()
+
+		public override void OnStartClient (NetworkClient client)
 		{
-			if (Input.GetKeyDown (KeyCode.N)) {
+			base.OnStartClient (client);
+			MainUIController.Instance.finishLaunchGame ();
+		}
+			public override void OnStartServer ()
+			{
+				base.OnStartServer ();
+			    MainUIController.Instance.finishLaunchGame ();
+				Invoke ("generatteSetup", 3.0f);
+					
+			}
+			public void generatteSetup ()
+			{
 
-				List< UnityEngine.Networking.PlayerController> list1=ClientScene.localPlayers;
-				for (int i = 0; i < list1.Count; i++) {
-					Debug.Log (list1[i].gameObject.name);
+				if (softUp == null && NetworkServer.active) {
+					softUp = GameObject.Instantiate (NetworkManager.singleton.spawnPrefabs [4]) as GameObject;
+					softUp.gameObject.name = "softSetup";
+					NetworkServer.Spawn (softUp);
+
 				}
 			}
+
 		}
-    }
-
-}
-
-
+		
 }

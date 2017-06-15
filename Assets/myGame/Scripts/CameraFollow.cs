@@ -7,27 +7,43 @@ public class CameraFollow : MonoBehaviour
 
 	public Transform cameraTrasform;
 	public Vector3 OffsetPosition;
-	void Start () {
+	void Start ()
+	{
 		cameraTrasform = GameObject.FindGameObjectWithTag ("MainCamera").gameObject.transform;
+
+
+		cameraTrasform.SetParent (this.gameObject.transform);
+		cameraTrasform.localPosition = new Vector3 (0,2,3);
+		cameraTrasform.rotation = Quaternion.Euler (10,180,0);
+
+
 		OffsetPosition = cameraTrasform.position - this.transform.position;
+		cameraTrasform.SetParent (null);
 		cameraTrasform.LookAt (transform.position);
+
+
 	}
 	
 
 	void Update () {
 		
-		scrollView ();
 		RotateView ();
+		scrollView ();
 		cameraTrasform.position = OffsetPosition + this.transform.position;
+		cameraTrasform.LookAt (transform.position);
 	}
 
 
 	private float distance;
 	public float ScrollSpeed=1.0f;
-	private void scrollView(){
+	private void scrollView()
+	{
 		distance = OffsetPosition.magnitude;
 		distance -= Input.GetAxis ("Mouse ScrollWheel")*ScrollSpeed;
 		OffsetPosition = OffsetPosition.normalized * distance;
+
+
+		//cameraTrasform.position = OffsetPosition + this.transform.position;
 	}
 	private bool isRotating=false;
 	public  float rotateSpeed=1.0f;
@@ -53,7 +69,12 @@ public class CameraFollow : MonoBehaviour
 				cameraTrasform.rotation = originalRotation;
 			}
 			OffsetPosition =cameraTrasform.position - transform.position;
+
+
+			//cameraTrasform.position = OffsetPosition + this.transform.position;
 		}
+
+
 
 
 	}
