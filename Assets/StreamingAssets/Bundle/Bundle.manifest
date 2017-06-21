@@ -2,11 +2,47 @@ ManifestFileVersion: 0
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: assets/prefabs/initialsence/castle.prefab.unity3d
+      Name: assets/prefabsassetbundle/web/delayload/cyclop_soldier.prefab.unity3d
       Dependencies: {}
     Info_1:
-      Name: assets/prefabs/initialsence/waterplane.prefab.unity3d
+      Name: assets/prefabsassetbundle/web/initialsence/castle.prefab.unity3d
       Dependencies: {}
     Info_2:
-      Name: assets/prefabs/initialsence/cowboy.prefab.unity3d
+      Name: assets/prefabsassetbundle/web/initialsence/cowboy.prefab.unity3d
+      Dependencies: {}
+    Info_3:
+      Name: assets/prefabsassetbundle/web/initialsence/waterplane.prefab.unity3d
+      Dependencies: {}
+    Info_4:
+      Name: assets/prefabsassetbundle/game2/bridge.prefab.unity3d
+      Dependencies: {}
+    Info_5:
+      Name: assets/prefabsassetbundle/game2/bush_2_autumn_pal.prefab.unity3d
+      Dependencies: {}
+    Info_6:
+      Name: assets/prefabsassetbundle/game2/bush_5_summer_pal.prefab.unity3d
+      Dependencies: {}
+    Info_7:
+      Name: assets/prefabsassetbundle/game2/grass_2_pal.prefab.unity3d
+      Dependencies: {}
+    Info_8:
+      Name: assets/prefabsassetbundle/game2/stone_2_snow_pal.prefab.unity3d
+      Dependencies: {}
+    Info_9:
+      Name: assets/prefabsassetbundle/game2/tree_20_summer_pal.prefab.unity3d
+      Dependencies: {}
+    Info_10:
+      Name: assets/prefabsassetbundle/game2/octogonal-tower.prefab.unity3d
+      Dependencies: {}
+    Info_11:
+      Name: assets/prefabsassetbundle/game2/cart_stand2.prefab.unity3d
+      Dependencies: {}
+    Info_12:
+      Name: assets/prefabsassetbundle/game2/cart_stand1.prefab.unity3d
+      Dependencies: {}
+    Info_13:
+      Name: assets/prefabsassetbundle/game2/cart_covered1.prefab.unity3d
+      Dependencies: {}
+    Info_14:
+      Name: assets/prefabsassetbundle/game2/terrain.prefab.unity3d
       Dependencies: {}

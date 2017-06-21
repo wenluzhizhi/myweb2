@@ -1,0 +1,46 @@
+ManifestFileVersion: 0
+CRC: 3562369522
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 828c1a97c9fa613bf1b8dfba66623da1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f592c0df3a046505d8495f92c81bb9fe
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: a9fdb41d0cd436c449dac2edeb4c7d03, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8df30fb6303ae4889711adb41d47c8, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+Assets:
+- Assets/PrefabsAssetBundle/web/InitialSence/Cowboy.prefab
+Dependencies: []

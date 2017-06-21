@@ -15,6 +15,7 @@ public class CreateAssetBundle
             _aim.assetBundleVariant = "unity3d";
         }
         AssetDatabase.RemoveUnusedAssetBundleNames();
+
     }
 
    
@@ -24,5 +25,10 @@ public class CreateAssetBundle
         Debug.Log("Create Bundles");
 		BuildPipeline.BuildAssetBundles("Assets/StreamingAssets/Bundle/");
     }
+
+
+
+
+
 
 }

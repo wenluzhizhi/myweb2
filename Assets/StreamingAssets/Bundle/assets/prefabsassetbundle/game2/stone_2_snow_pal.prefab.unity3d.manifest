@@ -1,0 +1,32 @@
+ManifestFileVersion: 0
+CRC: 1849462764
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2e3111dee8237c3385b833708449b486
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 540d70e77afe6fd8bf6ece50cde760bc
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+Assets:
+- Assets/PrefabsAssetBundle/Game2/Stone_2_snow_pal.prefab
+Dependencies: []
