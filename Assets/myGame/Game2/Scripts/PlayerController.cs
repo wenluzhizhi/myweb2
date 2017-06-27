@@ -36,7 +36,7 @@ namespace MyGame.Two
 			animator = this.gameObject.GetComponent<Animator> ();
 			rigidbody = this.gameObject.GetComponent<Rigidbody> ();
 			playerBoxcollider = this.gameObject.GetComponent<BoxCollider> ();
-			playerBoxcollider.center = new Vector3 (0, 0.7f, 0);
+			playerBoxcollider.center = new Vector3 (0, 0.8f, 0);
 			if (isLocalPlayer) 
 			{
 
@@ -81,9 +81,9 @@ namespace MyGame.Two
 			if (!isLocalPlayer)
 				return;
 			animatorState = animator.GetCurrentAnimatorStateInfo (0);
-			if (Input.GetKey (KeyCode.UpArrow)) {
+			if (Input.GetKey (KeyCode.UpArrow)||Input.GetKey(KeyCode.W)) {
 				playerForward (1);	
-			} else if (Input.GetKey (KeyCode.DownArrow)) {
+			} else if (Input.GetKey (KeyCode.DownArrow)||Input.GetKey(KeyCode.S)) {
 				playerForward (-1);
 			} else {
 				if (animatorState.IsName ("1HWalkF")) {
@@ -92,10 +92,10 @@ namespace MyGame.Two
 				animator.SetBool (WebConfig.animator_state_idle, true);
 			}
 
-			if (Input.GetKey (KeyCode.LeftArrow)) {
+			if (Input.GetKey (KeyCode.LeftArrow)||Input.GetKey(KeyCode.A)) {
 				playerRotateRight (-5);
 			}
-			if (Input.GetKey (KeyCode.RightArrow)) {
+			if (Input.GetKey (KeyCode.RightArrow)||Input.GetKey(KeyCode.D)) {
 				playerRotateRight (5);
 			}
 

@@ -34,6 +34,10 @@ namespace MyGame.Two
 		[SerializeField] private Text currentEnemyCountText;
 		[SerializeField] private Text currentOnlineCountText;
 		[SerializeField] private Button startGameButton;
+
+		[SerializeField] private GameObject OperationTips;
+
+
 		public SystemType systemType = SystemType.Host;
 		#endregion
 
@@ -88,8 +92,13 @@ namespace MyGame.Two
 			}
 		}
 
+		private bool isShowCaozuotips = false;
+		public void OnClickCaozuoTips(){
 
 
+			OperationTips.SetActive(!OperationTips.activeInHierarchy);
+			
+		}
 
 
 
